@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.time.Duration;
 
@@ -17,6 +18,7 @@ import static io.r2dbc.spi.ConnectionFactoryOptions.*;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.example")
 @EnableR2dbcRepositories(basePackages = "com.example.dao")
+@EnableTransactionManagement
 public class SpringReactiveWebDemoApplication {
 
     public static void main(String[] args) {

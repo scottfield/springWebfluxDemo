@@ -4,9 +4,11 @@ import com.example.dao.PersonRepository;
 import com.example.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
+@Transactional
 public class PersonService {
     @Autowired
     private PersonRepository personRepository;
@@ -24,6 +26,10 @@ public class PersonService {
     }
 
     public Mono<Person> updatePerson(Person person) {
-        return personRepository.save(person);
+        Mono<Person> updatedPerson = personRepository.save(person);
+        if (person.getUsername().equals("admin")) {
+            throw new IllegalArgumentException();
+        }
+        return updatedPerson;
     }
 }
