@@ -33,6 +33,8 @@ public class PersonController {
 
     @PutMapping("/user")
     public Mono updatePerson(@RequestBody Person person) {
-        return personService.updatePerson(person).doOnError(e->Mono.just(e.getMessage()));
+        //just a demo how to handle error in-line,maybe this kind of error handle is not very good, please use a global error handler instead.
+//        return personService.updatePerson(person).doOnError(e->System.out.println("update person failure")).onErrorReturn(ErrorResponse.builder().msg("failed to udpate").build());
+        return personService.updatePerson(person).doOnError(e->System.out.println("update person failure"));
     }
 }

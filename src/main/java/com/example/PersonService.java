@@ -25,10 +25,10 @@ public class PersonService {
         return personRepository.deleteById(id);
     }
 
-    public Mono<Person> updatePerson(Person person) {
+    public Mono updatePerson(Person person) {
         Mono<Person> updatedPerson = personRepository.save(person);
         if (person.getUsername().equals("admin")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("cannot update admin");
         }
         return updatedPerson;
     }
